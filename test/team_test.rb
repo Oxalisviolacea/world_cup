@@ -19,6 +19,31 @@ class TeamTest < Minitest::Test
   def test_the_team_can_be_eliminated
     team = Team.new("France")
 
+    team.eliminated = true
+    
     assert team.eliminated?
+  end
+
+  def test_it_can_add_a_player
+    team = Team.new("France")
+    mbappe = Player.new({name: "Kylian Mbappe", position: "forward"})
+    pogba = Player.new({name: "Paul Pogba", position: "midfielder"})
+
+    team.add_player(mbappe)
+    team.add_player(pogba)
+
+    assert_equal [mbappe, pogba], team.players
+  end
+
+  def test_it_can_sort_players_by_position
+    team = Team.new("France")
+    mbappe = Player.new({name: "Kylian Mbappe", position: "forward"})
+    pogba = Player.new({name: "Paul Pogba", position: "midfielder"})
+
+    team.add_player(mbappe)
+    team.add_player(pogba)
+
+    assert_equal [pogba], team.players_by_position("midfielder")
+    assert_equal [], team.players_by_position("defender")
   end
 end
