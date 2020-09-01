@@ -17,16 +17,12 @@ attr_reader :year, :teams
   end
 
   def all_players_by_position
-    all_players = {}
+    all_players = []
     @teams.each do |team|
-      team.players.each do |player|
-        if all_players[player.position]
-           all_players[player.position] << [position]
-        else
-          all_players[player.position] = [player]
-        end
-      end
+      all_players << team.players
     end
-    all_players
+    all_players.flatten.group_by do |player|
+      player.position
+    end
   end
 end
