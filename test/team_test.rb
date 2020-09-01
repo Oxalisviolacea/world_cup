@@ -15,4 +15,10 @@ class TeamTest < Minitest::Test
 
     assert_equal "France", team.country
   end
+
+  def test_the_team_can_be_eliminated
+    team = Team.new("France")
+
+    assert team.eliminated?
+  end
 end

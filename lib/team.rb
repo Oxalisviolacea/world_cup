@@ -4,4 +4,8 @@ class Team
   def initialize(country)
     @country = country
   end
+
+  def eliminated?
+   true
+  end
 end
